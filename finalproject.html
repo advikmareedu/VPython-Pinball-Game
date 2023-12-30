@@ -1,0 +1,652 @@
+<div id="glowscript" class="glowscript">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css" rel="stylesheet" />
+<link type="text/css" href="https://www.glowscript.org/css/ide.css" rel="stylesheet" />
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+// START JAVASCRIPT
+;(function() {;
+var ρσ_modules = {};
+ρσ_modules.pythonize = {};
+ρσ_modules.random = {};
+
+(function(){
+    function strings() {
+        var string_funcs, exclude, name;
+        string_funcs = set("capitalize strip lstrip rstrip islower isupper isspace lower upper swapcase center count endswith startswith find rfind index rindex format join ljust rjust partition rpartition replace split rsplit splitlines zfill".split(" "));
+        if (!arguments.length) {
+            exclude = (function(){
+                var s = ρσ_set();
+                s.jsset.add("split");
+                s.jsset.add("replace");
+                return s;
+            })();
+        } else if (arguments[0]) {
+            exclude = Array.prototype.slice.call(arguments);
+        } else {
+            exclude = null;
+        }
+        if (exclude) {
+            string_funcs = string_funcs.difference(set(exclude));
+        }
+        var ρσ_Iter0 = string_funcs;
+        ρσ_Iter0 = ((typeof ρσ_Iter0[Symbol.iterator] === "function") ? (ρσ_Iter0 instanceof Map ? ρσ_Iter0.keys() : ρσ_Iter0) : Object.keys(ρσ_Iter0));
+        for (var ρσ_Index0 of ρσ_Iter0) {
+            name = ρσ_Index0;
+            (ρσ_expr_temp = String.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name] = (ρσ_expr_temp = ρσ_str.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name];
+        }
+    };
+    if (!strings.__module__) Object.defineProperties(strings, {
+        __module__ : {value: "pythonize"}
+    });
+
+    ρσ_modules.pythonize.strings = strings;
+})();
+
+(function(){
+    var ρσ_seed_state, ρσ_get_random_byte;
+    ρσ_seed_state = (function(){
+        var ρσ_d = {};
+        ρσ_d["key"] = ρσ_list_decorate([]);
+        ρσ_d["key_i"] = 0;
+        ρσ_d["key_j"] = 0;
+        return ρσ_d;
+    }).call(this);
+    ρσ_get_random_byte = (function() {
+        var ρσ_anonfunc = function () {
+            var ρσ_unpack;
+            ρσ_seed_state.key_i = (ρσ_seed_state.key_i + 1) % 256;
+            ρσ_seed_state.key_j = (ρσ_seed_state.key_j + (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_i, ρσ_expr_temp)]) % 256;
+            ρσ_unpack = [(ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_j, ρσ_expr_temp)], 
+            (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_i, ρσ_expr_temp)]];
+            (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_i, ρσ_expr_temp)] = ρσ_unpack[0];
+            (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_j, ρσ_expr_temp)] = ρσ_unpack[1];
+            return (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(((ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_i, ρσ_expr_temp)] + (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_j, ρσ_expr_temp)]) % 256, ρσ_expr_temp)];
+        };
+        if (!ρσ_anonfunc.__module__) Object.defineProperties(ρσ_anonfunc, {
+            __module__ : {value: "random"}
+        });
+        return ρσ_anonfunc;
+    })();
+    function seed() {
+        var x = (arguments[0] === undefined || ( 0 === arguments.length-1 && arguments[arguments.length-1] !== null && typeof arguments[arguments.length-1] === "object" && arguments[arguments.length-1] [ρσ_kwargs_symbol] === true)) ? seed.__defaults__.x : arguments[0];
+        var ρσ_kwargs_obj = arguments[arguments.length-1];
+        if (ρσ_kwargs_obj === null || typeof ρσ_kwargs_obj !== "object" || ρσ_kwargs_obj [ρσ_kwargs_symbol] !== true) ρσ_kwargs_obj = {};
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "x")){
+            x = ρσ_kwargs_obj.x;
+        }
+        var i, j, ρσ_unpack;
+        ρσ_seed_state.key_i = ρσ_seed_state.key_j = 0;
+        if (typeof x === "number") {
+            x = x.toString();
+        } else if (typeof x !== "string") {
+            throw new TypeError("unhashable type: '" + typeof x + "'");
+        }
+        for (var ρσ_Index1 = 0; ρσ_Index1 < 256; ρσ_Index1++) {
+            i = ρσ_Index1;
+            (ρσ_expr_temp = ρσ_seed_state.key)[(typeof i === "number" && i < 0) ? ρσ_expr_temp.length + i : i] = i;
+        }
+        j = 0;
+        for (var ρσ_Index2 = 0; ρσ_Index2 < 256; ρσ_Index2++) {
+            i = ρσ_Index2;
+            j = (j + (ρσ_expr_temp = ρσ_seed_state.key)[(typeof i === "number" && i < 0) ? ρσ_expr_temp.length + i : i] + x.charCodeAt(i % x.length)) % 256;
+            ρσ_unpack = [(ρσ_expr_temp = ρσ_seed_state.key)[(typeof j === "number" && j < 0) ? ρσ_expr_temp.length + j : j], 
+            (ρσ_expr_temp = ρσ_seed_state.key)[(typeof i === "number" && i < 0) ? ρσ_expr_temp.length + i : i]];
+            (ρσ_expr_temp = ρσ_seed_state.key)[(typeof i === "number" && i < 0) ? ρσ_expr_temp.length + i : i] = ρσ_unpack[0];
+            (ρσ_expr_temp = ρσ_seed_state.key)[(typeof j === "number" && j < 0) ? ρσ_expr_temp.length + j : j] = ρσ_unpack[1];
+        }
+    };
+    if (!seed.__defaults__) Object.defineProperties(seed, {
+        __defaults__ : {value: {x:(new Date).getTime()}},
+        __handles_kwarg_interpolation__ : {value: true},
+        __argnames__ : {value: ["x"]},
+        __module__ : {value: "random"}
+    });
+
+    seed();
+    function random() {
+        var n, m, i;
+        n = 0;
+        m = 1;
+        for (var ρσ_Index3 = 0; ρσ_Index3 < 8; ρσ_Index3++) {
+            i = ρσ_Index3;
+            n += ρσ_get_random_byte() * m;
+            m *= 256;
+        }
+        return n / 0x10000000000000000;
+    };
+    if (!random.__module__) Object.defineProperties(random, {
+        __module__ : {value: "random"}
+    });
+
+    function randrange() {
+        var start, stop, step, width, n;
+        if (arguments.length === 1) {
+            return randbelow(int(arguments[0]));
+        }
+        start = int(arguments[0]);
+        stop = int(arguments[1]);
+        if (arguments.length < 3) {
+            step = 1;
+        } else {
+            step = int(arguments[2]);
+        }
+        width = stop - start;
+        if (step === 1) {
+            if (width > 0) {
+                return start + randbelow(width);
+            }
+            throw new ValueError("empty range for randrange()");
+        }
+        if (step > 0) {
+            n = Math.floor((width + step - 1) / step);
+        } else if (step < 0) {
+            n = Math.floor((width + step + 1) / step);
+        } else {
+            throw new ValueError("zero step for randrange()");
+        }
+        if (n <= 0) {
+            throw new ValueError("empty range in randrange(" + ρσ_str.format("{}", start) + ", " + ρσ_str.format("{}", stop) + ", " + ρσ_str.format("{}", step) + ")");
+        }
+        return start + step * randbelow(n);
+    };
+    if (!randrange.__module__) Object.defineProperties(randrange, {
+        __module__ : {value: "random"}
+    });
+
+    function randint(a, b) {
+        return int(random() * (b - a + 1) + a);
+    };
+    if (!randint.__argnames__) Object.defineProperties(randint, {
+        __argnames__ : {value: ["a", "b"]},
+        __module__ : {value: "random"}
+    });
+
+    function uniform(a, b) {
+        return random() * (b - a) + a;
+    };
+    if (!uniform.__argnames__) Object.defineProperties(uniform, {
+        __argnames__ : {value: ["a", "b"]},
+        __module__ : {value: "random"}
+    });
+
+    function randbelow(n) {
+        return Math.floor(random() * n);
+    };
+    if (!randbelow.__argnames__) Object.defineProperties(randbelow, {
+        __argnames__ : {value: ["n"]},
+        __module__ : {value: "random"}
+    });
+
+    function choice(seq) {
+        if (seq.length > 0) {
+            return seq[ρσ_bound_index(randbelow(seq.length), seq)];
+        } else {
+            throw new IndexError;
+        }
+    };
+    if (!choice.__argnames__) Object.defineProperties(choice, {
+        __argnames__ : {value: ["seq"]},
+        __module__ : {value: "random"}
+    });
+
+    function shuffle() {
+        var x = ( 0 === arguments.length-1 && arguments[arguments.length-1] !== null && typeof arguments[arguments.length-1] === "object" && arguments[arguments.length-1] [ρσ_kwargs_symbol] === true) ? undefined : arguments[0];
+        var random_f = (arguments[1] === undefined || ( 1 === arguments.length-1 && arguments[arguments.length-1] !== null && typeof arguments[arguments.length-1] === "object" && arguments[arguments.length-1] [ρσ_kwargs_symbol] === true)) ? shuffle.__defaults__.random_f : arguments[1];
+        var ρσ_kwargs_obj = arguments[arguments.length-1];
+        if (ρσ_kwargs_obj === null || typeof ρσ_kwargs_obj !== "object" || ρσ_kwargs_obj [ρσ_kwargs_symbol] !== true) ρσ_kwargs_obj = {};
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "random_f")){
+            random_f = ρσ_kwargs_obj.random_f;
+        }
+        var j, ρσ_unpack, i;
+        for (var ρσ_Index4 = 0; ρσ_Index4 < x.length; ρσ_Index4++) {
+            i = ρσ_Index4;
+            j = Math.floor(random_f() * (i + 1));
+            ρσ_unpack = [x[(typeof j === "number" && j < 0) ? x.length + j : j], x[(typeof i === "number" && i < 0) ? x.length + i : i]];
+            x[(typeof i === "number" && i < 0) ? x.length + i : i] = ρσ_unpack[0];
+            x[(typeof j === "number" && j < 0) ? x.length + j : j] = ρσ_unpack[1];
+        }
+        return x;
+    };
+    if (!shuffle.__defaults__) Object.defineProperties(shuffle, {
+        __defaults__ : {value: {random_f:random}},
+        __handles_kwarg_interpolation__ : {value: true},
+        __argnames__ : {value: ["x", "random_f"]},
+        __module__ : {value: "random"}
+    });
+
+    function sample(population, k) {
+        var x, j, ρσ_unpack, i;
+        x = population.slice();
+        for (var ρσ_Index5 = population.length - 1; ρσ_Index5 > population.length - k - 1; ρσ_Index5-=1) {
+            i = ρσ_Index5;
+            j = Math.floor(random() * (i + 1));
+            ρσ_unpack = [x[(typeof j === "number" && j < 0) ? x.length + j : j], x[(typeof i === "number" && i < 0) ? x.length + i : i]];
+            x[(typeof i === "number" && i < 0) ? x.length + i : i] = ρσ_unpack[0];
+            x[(typeof j === "number" && j < 0) ? x.length + j : j] = ρσ_unpack[1];
+        }
+        return x.slice(population.length - k);
+    };
+    if (!sample.__argnames__) Object.defineProperties(sample, {
+        __argnames__ : {value: ["population", "k"]},
+        __module__ : {value: "random"}
+    });
+
+    ρσ_modules.random.ρσ_seed_state = ρσ_seed_state;
+    ρσ_modules.random.ρσ_get_random_byte = ρσ_get_random_byte;
+    ρσ_modules.random.seed = seed;
+    ρσ_modules.random.random = random;
+    ρσ_modules.random.randrange = randrange;
+    ρσ_modules.random.randint = randint;
+    ρσ_modules.random.uniform = uniform;
+    ρσ_modules.random.randbelow = randbelow;
+    ρσ_modules.random.choice = choice;
+    ρσ_modules.random.shuffle = shuffle;
+    ρσ_modules.random.sample = sample;
+})();
+async function __main__() {
+"use strict";
+    var display = canvas;
+    var scene = canvas();
+
+    function round(num, n=0) {return Number(num.toFixed(n))}
+
+    var version, print, arange, __name__, type, ρσ_ls, starting_position, leftwall, rightwall, topwall, bottomwall, ground, scoreBumper, pyr, cyl, counter, L, ball, leftholder, rightholder, rightarmpos, l, h, w, rightarm, arr, leftarmpos, leftarm, RATE, dt;
+    version = ρσ_list_decorate([ "3.2", "glowscript" ]);
+    Array.prototype['+'] = function(r) {return this.concat(r)}
+    Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
+    window.__GSlang = "vpython";
+    print = GSprint;
+    arange = range;
+    __name__ = "__main__";
+    type = pytype;
+    var strings = ρσ_modules.pythonize.strings;
+
+    strings();
+    "6";
+    scene.bind("keydown", keydown_fun);
+    var random = ρσ_modules.random;
+
+    "8";
+    starting_position = vec(0, 1["-u"]()["*"](1), 0);
+    "9";
+    leftwall = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({size: vec(1, 1, 18), pos: vec(0, 1["-u"]()["*"](1), 0)["+"](vec(1["-u"]()["*"](4), 1, 0)), color: color.green})]);
+    "13";
+    rightwall = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({size: vec(1, 1, 18), pos: vec(0, 1["-u"]()["*"](1), 0)["+"](vec(4, 1, 0)), color: color.red})]);
+    "17";
+    topwall = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({size: vec(8, 1, 1), pos: vec(0, 1["-u"]()["*"](1), 0)["+"](vec(0, 1, 1["-u"]()["*"](9))), color: color.white})]);
+    "21";
+    bottomwall = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({size: vec(8, 1, 1), pos: vec(0, 1["-u"]()["*"](1), 0)["+"](vec(0, 1, 9)), color: color.black})]);
+    "27";
+    ground = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({size: 1["*"](vec(8, 1, 18)), pos: starting_position, color: vec(.5, .5, 0)})]);
+    "32";
+    scoreBumper = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({size: vec(1, 1, 1), pos: starting_position["+"](vec(2, 1, 1["-u"]()["*"](3))), color: color.white})]);
+    "36";
+    pyr = ρσ_interpolate_kwargs.call(this, pyramid, [ρσ_desugar_kwargs({size: vec(1, 1, 1), pos: starting_position["+"](vec(1["-u"]()["*"](2), 1, 1["-u"]()["*"](1))), axis: vec(0, 1, 0), color: color.blue})]);
+    "41";
+    cyl = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({size: vec(1, 1, 1), pos: starting_position["+"](vec(1, 1, 2)), axis: vec(0, 1, 0), color: color.yellow})]);
+    "47";
+    counter = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({size: vec(1, 1, 1), pos: vec(0, 1["-u"]()["*"](3), 0), axis: vec(0, 0, 0), coloer: color.white, opacity: 0})]);
+    "53";
+    async function makeball(starting_position, starting_vel, starting_acc) {
+        var ρσ_ls, pinball;
+        "59";
+        pinball = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({size: vec(.5, .5, .5), pos: starting_position["+"](vec(2, 0, 0)), accel: vec(0, 0, .1), color: color.red})]);
+        "65";
+        pinball.vel = starting_vel;
+        "67";
+        return pinball;
+    };
+    if (!makeball.__argnames__) Object.defineProperties(makeball, {
+        __argnames__ : {value: ["starting_position", "starting_vel", "starting_acc"]},
+        __module__ : {value: null}
+    });
+
+    "69";
+    L = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pos: vec(0, .25, 1["-u"]()["*"](10)), text: "Score: "["+"](counter.axis.z)})]);
+    "70";
+    ball = (await makeball(vec(0, 0, 0), vec(0, 0, 0)));
+    "72";
+    leftholder = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({size: vec(4, 1, 1), pos: vec(1["-u"]()["*"](3), 0, 5), axis: vec(1, 0, 1)})]);
+    "77";
+    rightholder = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({size: vec(4, 1, 1), pos: vec(3, 0, 5), axis: vec(1["-u"]()["*"](1), 0, 1)})]);
+    "81";
+    rightarmpos = vec(1.5, 0, 6.5);
+    "82";
+    l = 1.25;
+    "83";
+    h = .5;
+    "84";
+    w = .5;
+    "85";
+    rightarm = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: vector(rightarmpos), axis: vector(1["-u"]()["*"](.5), 0, 1), length: l, height: h, width: w, turn: vec(0, 0, 0)})]);
+    "90";
+    arr = ρσ_interpolate_kwargs.call(this, arrow, [ρσ_desugar_kwargs({pos: vec(rightarmpos), axis: vec(0, 1, 0), shaftwidth: .1})]);
+    "94";
+    leftarmpos = vec(1["-u"]()["*"](1.5), 0, 6.5);
+    "95";
+    leftarm = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: vector(leftarmpos), axis: vector(.5, 0, 1), length: l, height: h, width: w, turn: vec(0, 0, 0)})]);
+    "100";
+    arr = ρσ_interpolate_kwargs.call(this, arrow, [ρσ_desugar_kwargs({pos: vec(leftarmpos), axis: vec(0, 1, 0), shaftwidth: .1})]);
+    "105";
+    scene.width = 640;
+    "106";
+    scene.height = 480;
+    "107";
+    scene.background = vec(1, 1, 1);
+    "108";
+    RATE = 100;
+    "109";
+    dt = 1["/"](1["*"](RATE));
+    "111";
+    scene.forward = vec(0, 1["-u"]()["*"](14), 1["-u"]()["*"](14));
+    "117";
+    while (true) {
+        "119";
+        (await rate(RATE));
+        "122";
+        (await leftholdercollision());
+        "123";
+        (await rightholdercollision());
+        "124";
+        ball.pos = ball.pos["+"](ball.vel["*"](dt));
+        "125";
+        (await wall_collisions(ball));
+        "126";
+        (await bumpercollisions(pyr));
+        "127";
+        (await bumpercollisions(cyl));
+        "128";
+        (await bumpercollisions(scoreBumper));
+        "129";
+        leftarm.axis=leftarm.axis["+"](leftarm.turn);
+        "130";
+        rightarm.axis=rightarm.axis["+"](rightarm.turn);
+        "131";
+        leftarm.length = l;
+        "132";
+        rightarm.length = l;
+        "133";
+        (await leftreset(leftarm));
+        "134";
+        (await rightreset(rightarm));
+        "135";
+        (await armcollision());
+        "137";
+        ball.vel.z=ball.vel.z["+"](.1);
+    }
+    "141";
+    async function wall_collisions(ball) {
+        var ρσ_ls, X, gameover;
+        "146";
+        if (ball.pos.z["<"](topwall.pos.z)) {
+            "147";
+            ball.pos.z = topwall.pos.z;
+            "148";
+            ball.vel.z=ball.vel.z["*"](1["-u"]()["*"](1));
+            "149";
+            counter.axis.z=counter.axis.z["+"](1);
+            "150";
+            L.text = "Score: "["+"](counter.axis.z);
+            "153";
+        }
+        if (ball.pos.x["<"](leftwall.pos.x)) {
+            "154";
+            ball.pos.x = leftwall.pos.x;
+            "155";
+            ball.vel.x=ball.vel.x["*"](1["-u"]()["*"](1));
+            "157";
+        }
+        if (ball.pos.x[">"](rightwall.pos.x)) {
+            "158";
+            ball.pos.x = rightwall.pos.x;
+            "159";
+            ball.vel.x=ball.vel.x["*"](1["-u"]()["*"](1));
+            "161";
+        }
+        if (ball.pos.z[">"](bottomwall.pos.z)) {
+            "162";
+            ball.pos.z = bottomwall.pos.z;
+            "163";
+            ball.vel.z=ball.vel.z["*"](0);
+            "164";
+            X = random.choice(list(range(1["-u"]()["*"](4), 4)));
+            "165";
+            ball.pos = vec(X, 0, 0);
+            "166";
+            counter.axis.x=counter.axis.x["+"](1);
+            "167";
+            if (counter.axis.x[">"](3)) {
+                "168";
+                gameover = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pos: vec(0, .25, 0), text: "GAME OVER :("})]);
+                "169";
+                ball.pos = vec(0, 0, 19);
+            }
+        }
+    };
+    if (!wall_collisions.__argnames__) Object.defineProperties(wall_collisions, {
+        __argnames__ : {value: ["ball"]},
+        __module__ : {value: null}
+    });
+
+    "174";
+    async function keydown_fun(event) {
+        var ρσ_ls, key, amount;
+        "177";
+        key = event.key;
+        "180";
+        amount = .42;
+        "181";
+        if ((key === "up" || typeof key === "object" && ρσ_equals(key, "up")) || ρσ_in(key, "wWiI")) {
+            "182";
+            ball.vel = ball.vel["+"](vec(0, 0, 1["-u"]()["*"](amount)));
+            "183";
+        } else if ((key === "left" || typeof key === "object" && ρσ_equals(key, "left")) || ρσ_in(key, "aAjJ")) {
+            "184";
+            ball.vel = ball.vel["+"](vec(1["-u"]()["*"](amount), 0, 0));
+            "185";
+        } else if ((key === "down" || typeof key === "object" && ρσ_equals(key, "down")) || ρσ_in(key, "sSkK")) {
+            "186";
+            ball.vel = ball.vel["+"](vec(0, 0, amount));
+            "187";
+        } else if ((key === "right" || typeof key === "object" && ρσ_equals(key, "right")) || ρσ_in(key, "dDlL")) {
+            "188";
+            ball.vel = ball.vel["+"](vec(amount, 0, 0));
+            "189";
+        } else if (ρσ_in(key, " rR")) {
+            "190";
+            ball.vel = vec(0, 0, 0);
+            "191";
+            ball.pos = vec(0, 0, 0);
+            "192";
+        } else if ((key === "x" || typeof key === "object" && ρσ_equals(key, "x"))) {
+            "193";
+            rightarm.turn = vec(1["-u"]()["*"](.1), 0, 1["-u"]()["*"](.1));
+            "194";
+        } else if ((key === "z" || typeof key === "object" && ρσ_equals(key, "z"))) {
+            "195";
+            leftarm.turn = vec(.1, 0, 1["-u"]()["*"](.1));
+        }
+    };
+    if (!keydown_fun.__argnames__) Object.defineProperties(keydown_fun, {
+        __argnames__ : {value: ["event"]},
+        __module__ : {value: null}
+    });
+
+    "198";
+    async function bumpercollisions(bumper) {
+        var ρσ_ls, d;
+        "203";
+        d = .5;
+        "204";
+        if (abs(ball.pos.z["-"](1["*"](bumper.pos.z)))["<="](d)) {
+            "205";
+            if (abs(ball.pos.x["-"](1["*"](bumper.pos.x)))["<="](d)) {
+                "206";
+                ball.vel.z=ball.vel.z["*"](1["-u"]()["*"](1));
+                "207";
+                counter.axis.z=counter.axis.z["+"](1);
+                "208";
+                L.text = "Score: "["+"](counter.axis.z);
+                "209";
+            }
+        }
+        if (abs(ball.pos.x["-"](1["*"](bumper.pos.x)))["<="](d)) {
+            "210";
+            if (abs(ball.pos.z["-"](1["*"](bumper.pos.z)))["<="](d)) {
+                "211";
+                ball.vel.x=ball.vel.x["*"](1["-u"]()["*"](1));
+                "212";
+                counter.axis.z=counter.axis.z["+"](1);
+                "213";
+                L.text = "Score: "["+"](counter.axis.z);
+            }
+        }
+    };
+    if (!bumpercollisions.__argnames__) Object.defineProperties(bumpercollisions, {
+        __argnames__ : {value: ["bumper"]},
+        __module__ : {value: null}
+    });
+
+    "214";
+    async function leftholdercollision() {
+        var ρσ_ls, Z, X, xvel, zvel;
+        "217";
+        Z = ball.pos.z;
+        "218";
+        X = ball.pos.x;
+        "219";
+        xvel = ball.vel.x;
+        "220";
+        zvel = ball.vel.z;
+        "221";
+        if (X["<"](1["-u"]()["*"](1))) {
+            "222";
+            if (abs(Z["-"](1["*"](X))["-"](1["*"](6))["-"](1["*"](sqrt(2))))["<"](.25)) {
+                "223";
+                ball.vel.x = zvel;
+                "224";
+                ball.vel.z = 1["-u"]()["*"](xvel);
+            }
+        }
+    };
+    if (!leftholdercollision.__module__) Object.defineProperties(leftholdercollision, {
+        __module__ : {value: null}
+    });
+
+    "226";
+    async function rightholdercollision() {
+        var ρσ_ls, Z, X, xvel, zvel;
+        "229";
+        Z = ball.pos.z;
+        "230";
+        X = ball.pos.x;
+        "231";
+        xvel = ball.vel.x;
+        "232";
+        zvel = ball.vel.z;
+        "233";
+        if (X[">"](1)) {
+            "234";
+            if (abs(Z["-"](1["*"](1["-u"]()["*"](X)["+"](6)["+"](sqrt(2)))))["<"](.25)) {
+                "235";
+                ball.vel.x = zvel;
+                "236";
+                ball.vel.z = 1["-u"]()["*"](xvel);
+            }
+        }
+    };
+    if (!rightholdercollision.__module__) Object.defineProperties(rightholdercollision, {
+        __module__ : {value: null}
+    });
+
+    "239";
+    async function leftreset(object) {
+        "243";
+        if (object.axis.z["<="](0)) {
+            "244";
+            object.turn = 1["-u"]()["*"](object.turn);
+            "246";
+        }
+        if (object.axis.x["<"](0)) {
+            "247";
+            object.turn = vec(0, 0, 0);
+        }
+    };
+    if (!leftreset.__argnames__) Object.defineProperties(leftreset, {
+        __argnames__ : {value: ["object"]},
+        __module__ : {value: null}
+    });
+
+    "249";
+    async function rightreset(object) {
+        "253";
+        if (object.axis.z["<="](0)) {
+            "254";
+            object.turn = 1["-u"]()["*"](object.turn);
+            "256";
+        }
+        if (object.axis.x[">"](0)) {
+            "257";
+            object.turn = vec(0, 0, 0);
+        }
+    };
+    if (!rightreset.__argnames__) Object.defineProperties(rightreset, {
+        __argnames__ : {value: ["object"]},
+        __module__ : {value: null}
+    });
+
+    "259";
+    async function armcollision() {
+        var ρσ_ls, zl, xl, lpx, lpz, zr, xr, rpx, rpz;
+        "262";
+        zl = leftarm.axis.z;
+        "263";
+        xl = leftarm.axis.x;
+        "264";
+        lpx = leftarm.pos.x;
+        "265";
+        lpz = leftarm.pos.z;
+        "266";
+        if (ball.pos.x["<"](lpx["+"](xl))) {
+            "267";
+            if (ball.pos.z[">"](lpz["+"](zl))) {
+                "268";
+                ball.vel.z = ball.vel.z["*"](1["-u"]())["*"](1);
+            }
+        }
+        "270";
+        zr = rightarm.axis.z;
+        "271";
+        xr = rightarm.axis.x;
+        "272";
+        rpx = rightarm.pos.x;
+        "273";
+        rpz = rightarm.pos.z;
+        "274";
+        if (ball.pos.x[">"](rpx["+"](xr))) {
+            "275";
+            if (ball.pos.z[">"](rpz["+"](zr))) {
+                "276";
+                ball.vel.z=ball.vel.z["*"](1["-u"]()["*"](1));
+            }
+        }
+    };
+    if (!armcollision.__module__) Object.defineProperties(armcollision, {
+        __module__ : {value: null}
+    });
+
+};
+if (!__main__.__module__) Object.defineProperties(__main__, {
+    __module__ : {value: null}
+});
+
+;$(function(){ window.__context = { glowscript_container: $("#glowscript").removeAttr("id") }; __main__() })})()
+// END JAVASCRIPT
+
+//--><!]]></script>
+</div>
